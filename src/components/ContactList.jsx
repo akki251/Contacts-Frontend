@@ -50,7 +50,7 @@ const ContactList = () => {
   };
 
   return (
-    <div className="bg-gray-100 flex-1 flex flex-col px-3 space-y-8 ">
+    <div className="bg-gray-100 flex-1 flex flex-col px-3 space-y-4 ">
       <h3>Your Contacts</h3>
       {!isLoading && contacts?.length === 0 && <NoContent />}
       {isLoading && <Loader />}
@@ -58,8 +58,8 @@ const ContactList = () => {
         <AutoSizer>
           {({ height, width }) => (
             <List
-              height={height - 50}
-              itemSize={120}
+              height={height - 70}
+              itemSize={110}
               itemCount={contacts.length}
               itemData={contacts}
               width={width}
