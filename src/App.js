@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-
+import Home from "./components/Home";
+import Login from "./components/Login";
+import { NextUIProvider } from "@nextui-org/react";
+import { useContactStore } from "./store";
+import jwtDecode from "jwt-decode";
+import { Toaster } from "react-hot-toast";
 function App() {
+  const logout = useContactStore((state) => state.logout);
+
+  const loggedInProfile = useContactStore((state) => state.loggedInProfile);
+
+  if (loggedInProfile) {
+    const token = loggedInProfile.stsTokenManager.accessToken;
+    const decoded_data = jwtDecode(token);
+    if (decoded_data.exp * 1000 < new Date().getTime()) logout();
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <NextUIProvider>
+        <Toaster />
+        {loggedInProfile ? <Home /> : <Login />}
+      </NextUIProvider>
+    </>
   );
 }
 
