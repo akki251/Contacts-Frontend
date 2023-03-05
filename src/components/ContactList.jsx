@@ -20,7 +20,8 @@ const ContactList = () => {
       });
 
       if (errorMessage) {
-        logout();
+        // logout();
+        console.log(errorMessage);
         return toast.error(errorMessage);
       }
 

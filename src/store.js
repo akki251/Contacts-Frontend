@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { addContactToBackend } from "./api/contacts";
 
 export const useContactStore = create((set) => ({
   contacts: [],
@@ -32,11 +31,9 @@ export const useContactStore = create((set) => ({
   setContacts: (contacts) => set((state) => ({ contacts })),
   addContact: (contact) =>
     set((state) => {
-      {
-        return {
-          contacts: [contact, ...state.contacts],
-        };
-      }
+      return {
+        contacts: [contact, ...state.contacts],
+      };
     }),
 
   deleteContact: (id) =>

@@ -7,6 +7,7 @@ import { deleteContactBackend } from "./../api/contacts";
 import { catchError } from "../utils/catchError";
 import React from "react";
 const ContactItem = ({ name, contact_number, id }) => {
+  console.log("render");
   const deleteContact = useContactStore((state) => state.deleteContact);
   const setUpdateContact = useContactStore((state) => state.setUpdateContact);
   const logout = useContactStore((state) => state.logout);

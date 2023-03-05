@@ -9,17 +9,26 @@ function App() {
 
   const loggedInProfile = useContactStore((state) => state.loggedInProfile);
 
+  let showContent = <Login />;
+
   if (loggedInProfile) {
-    const token = loggedInProfile.stsTokenManager.accessToken;
+    let token = loggedInProfile.stsTokenManager.accessToken;
+
     const decoded_data = jwtDecode(token);
-    if (decoded_data.exp * 1000 < new Date().getTime()) logout();
+
+    // check token expiry
+    if (decoded_data.exp * 1000 < new Date().getTime()) {
+      logout();
+    } else {
+      showContent = <Home />;
+    }
   }
 
   return (
     <>
       <NextUIProvider>
         <Toaster />
-        {loggedInProfile ? <Home /> : <Login />}
+        {showContent}
       </NextUIProvider>
     </>
   );
