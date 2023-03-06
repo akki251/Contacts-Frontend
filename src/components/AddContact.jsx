@@ -101,17 +101,15 @@ const AddContact = () => {
       ...contact_data,
       _id: id,
     });
-    setContactDataInput((prevContactInput) => {
-      const resetInput = {
-        name: {
-          value: "",
-        },
-        contact_number: {
-          value: "",
-        },
-      };
-
-      return resetInput;
+    setContactDataInput({
+      name: {
+        value: "",
+        invalidText: "",
+      },
+      contact_number: {
+        value: "",
+        invalidText: "",
+      },
     });
   };
 
